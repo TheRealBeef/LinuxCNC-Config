@@ -1,0 +1,22 @@
+T9   P0   Z+42.078769 ; 8mm Ballmill - tisin - alu
+T12  P0   Z+47.567570 ; 14mm bap300r - alu inserts
+T19  P0   Z+58.625066 ; 4mm Endmill - 3F - No Coating - Alu
+T20  P0   Z+36.425668 ; 4mm endmill - tisin - alu
+T24  P0   Z+40.268199 ; 8mm endmill - tisin - alu
+T25  P0   Z+46.157003 ; 10mm 3f endmill - no coating - alu
+T34  P0   Z+38.228001 ; 6mm 90deg-v - altisin - alu
+T99  P0   D+1.952100 Z+59.267368 ; Probe
+T113 P0   Z+45.940967 ; 14mm BAP300R - Steel inserts
+T119 P0   Z+35.719567 ; 6mm endmill - tisin - steel
+T132 P0   Z+32.751835 ; 6mm 90deg-v - altisin - steel
+T217 P0   Z+75.571066 ; 10mm compression - wood
+T240 P0   Z+31.092000 ; 2.5mm Center Drill - Steel
+T241 P0   Z+34.451200 ; 2.5mm center drill - alu
+T307 P0   Z+60.005335 ; 4mm hss drill - steel
+T311 P0   Z+67.758666 ; 6mm hss drill - steel
+T319 P0   Z+39.847462 ; 2.5mm hss drill - alu
+T322 P0   Z+63.279134 ; 4mm hss drill - alu
+T326 P0   Z+76.103066 ; 6mm hss drill - alu
+T666 P0   Z+49.367730 ; Wood 20mm T-slot
+T215 P0   Z+53.535334 ; 6mm Compression - wood
+T213 P0   Z+35.768666 ; 4mm compression - wood
