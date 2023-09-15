@@ -1,29 +1,21 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 700x475+190+338
-placeFrames 0.4127906976744186
-set ::ratio 0.4127906976744186
+wm geometry . 700x475+94+502
+placeFrames 0.4956395348837209
+set ::ratio 0.4956395348837209
 set ::old_w_leftf 160
 set ::watchlist {
-    pin+hm2_7i76e.0.7i76.0.0.input-12-not
-    pin+hm2_7i76e.0.7i76.0.0.input-13
-    pin+hm2_7i76e.0.7i76.0.0.input-12
-    pin+hm2_7i76e.0.7i76.0.0.input-13-not
-    pin+hm2_7i76e.0.7i76.0.0.input-14
-    pin+hm2_7i76e.0.7i76.0.0.input-14-not
-    pin+hm2_7i76e.0.7i76.0.0.input-15-not
-    pin+hm2_7i76e.0.7i76.0.0.input-11-not
-    sig+probe-tool
-    sig+spindle-current
-    sig+spindle-speed
-    sig+spindle-speed-fb
-    pin+vfd.rated-motor-current
-    pin+vfd.spindle-at-speed-tolerance
-    pin+vfd.spindle-at-speed
-    pin+vfd.spindle-forward
-    pin+vfd.motor-poles
-    pin+vfd.max-freq
-    pin+vfd.hycomm-ok
+    sig+min-home-x
+    sig+home-y2
+    sig+min-home-y
+    sig+min-home-z
+    sig+probe-in
+    sig+tool_sensor-in
+    sig+estop-ext
+    pin+motion.probe-input
+    pin+ini.x.max_acceleration
+    pin+ini.y.max_acceleration
+    pin+ini.z.max_acceleration
 }
 set ::workmode watchhal
 set ::watchInterval 100

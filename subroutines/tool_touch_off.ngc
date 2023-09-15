@@ -11,12 +11,12 @@ o<tool_touch_off> sub
 
 ;-1- Transfer parameters
 ;Adding and changing the variables and transfer parameters leads to the routine not being executed (LinuxCNC/Probe Basic).
-#<fast_probe_fr> = 400.                 (#4000 set from probe screen fast probe feed rate)
-#<slow_probe_fr> = 200.                 (#4001 set from probe screen slow probe feedrate)
-#<z_max_travel> = 60.                  (#4002 max z distance the tool travels before erroring out if not contact is made)
-#<xy_max_travel> = 0.                 (#4003 max xy distance the tool travels before erroring out if not contact is made)
-#<spindle_zero_height> = 100.           (#4004 G53 distance from spindle nose triggering point on touch plate up for tools with zero length)
-#<retract_distance> = 5.              (#4005 distance the tool retracts after making contact during fast feed mode)
+#<fast_probe_fr> = #1                 (#4000 set from probe screen fast probe feed rate)
+#<slow_probe_fr> = #2                 (#4001 set from probe screen slow probe feedrate)
+#<z_max_travel> = #3                  (#4002 max z distance the tool travels before erroring out if not contact is made)
+#<xy_max_travel> = #4                 (#4003 max xy distance the tool travels before erroring out if not contact is made)
+#<spindle_zero_height> = #5           (#4004 G53 distance from spindle nose triggering point on touch plate up for tools with zero length)
+#<retract_distance> = #6              (#4005 distance the tool retracts after making contact during fast feed mode)
 
 
 ;-2- Fixed parameters

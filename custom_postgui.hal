@@ -3,3 +3,147 @@
 
 #net spindle-speed-fb => gmoccapy.spindle_feedback_bar
 #net spindle-at-speed => gmoccapy.spindle_at_speed_led
+
+# *** Spindle Load Percent ***
+loadrt load_conv
+
+addf load-conv.0 servo-thread
+
+setp qtpyvcp.spindle-load-indicator.max-val 100
+net spindle-current => load-conv.0.amps
+net spindle-load qtpyvcp.spindle-load-indicator.in-f <= load-conv.0.percent
+net spindle-speed-fb => qtpyvcp.spindle-encoder-rpm.in
+
+# *** Add Time ***
+loadrt time
+loadrt not
+
+addf time.0 servo-thread
+addf not.0 servo-thread
+
+net prog-running not.0.in <= halui.program.is-idle
+net cycle-timer time.0.start <= not.0.out
+net cycle-seconds qtpyvcp.timerseconds.in <= time.0.seconds
+net cycle-minutes qtpyvcp.timerminutes.in <= time.0.minutes
+net cycle-hours qtpyvcp.timerhours.in <= time.0.hours
+
+# *** Slow Jogging***
+loadrt mux2 names=xmux,ymux,zmux
+addf xmux servo-thread
+addf ymux servo-thread
+addf zmux servo-thread
+
+net slowselect <= halui.mode.is-manual
+net slowselect => xmux.sel => ymux.sel => zmux.sel
+
+setp xmux.in0   [AXIS_X]MAX_ACCELERATION
+setp ymux.in0   [AXIS_Y]MAX_ACCELERATION
+setp zmux.in0   [AXIS_Z]MAX_ACCELERATION
+
+setp xmux.in1   1000.0
+setp ymux.in1   1000.0
+setp zmux.in1   500.0
+
+net xmux-sig xmux.out =>     ini.x.max_acceleration
+net ymux-sig ymux.out =>     ini.y.max_acceleration
+net zmux-sig zmux.out =>     ini.z.max_acceleration
+
+# *** Status LEDs ***
+# net enter-hal-input-name-here  <=  qtpyvcp.1in1.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in2.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in3.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in4.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in5.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in6.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in7.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in8.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in9.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in10.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in11.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in12.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in13.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in14.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in15.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in16.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in17.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in18.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in19.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in20.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in21.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in22.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in23.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in24.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in25.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in26.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in27.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in28.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in29.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in30.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in31.on
+# net enter-hal-input-name-here  <=  qtpyvcp.1in32.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in1.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in2.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in3.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in4.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in5.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in6.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in7.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in8.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in9.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in10.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in11.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in12.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in13.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in14.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in15.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in16.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in17.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in18.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in19.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in20.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in21.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in22.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in23.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in24.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in25.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in26.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in27.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in28.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in29.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in30.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in31.on
+# net enter-hal-input-name-here  <=  qtpyvcp.2in32.on
+
+# --- OUTPUTS ---
+net min-home-z  =>  qtpyvcp.1out1.on
+net min-home-x =>  qtpyvcp.1out2.on
+net min-home-y  =>  qtpyvcp.1out3.on
+net home-y2  =>  qtpyvcp.1out4.on
+net probe-tool motion.probe-input  =>  qtpyvcp.1out5.on
+net probe-in  =>  qtpyvcp.1out6.on
+net tool_sensor-in  =>  qtpyvcp.1out7.on
+net estop-ext  =>  qtpyvcp.1out8.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out9.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out10.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out11.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out12.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out13.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out14.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out15.on
+# net enter-hal-output-name-here  =>  qtpyvcp.1out16.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out1.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out2.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out3.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out4.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out5.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out6.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out7.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out8.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out9.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out10.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out11.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out12.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out13.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out14.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out15.on
+# net enter-hal-output-name-here  =>  qtpyvcp.2out16.on

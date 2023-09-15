@@ -1,3 +1,8 @@
+# *** Probe graphic simulation trigger push probe tip ***
+# net probe-in  =>  qtpyvcp.probe-in.out
+# net probe-in  <=  qtpyvcp.probe-led.on
+
+# *** Probe HAL ***
 loadrt or2 count=2
 addf or2.0 servo-thread
 addf or2.1 servo-thread
@@ -5,6 +10,7 @@ addf or2.1 servo-thread
 
 net tool_sensor-in  <= hm2_7i76e.0.7i76.0.0.input-14-not
 net probe-in          	<= hm2_7i76e.0.7i76.0.0.input-13-not
+net estop-ext     <=  hm2_7i76e.0.7i76.0.0.input-15-not
 
 net tool_sensor-in => or2.0.in0
 net probe-in => or2.0.in1
